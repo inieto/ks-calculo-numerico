@@ -2,7 +2,7 @@ package algoritmos.puntuales;
 
 import excepciones.Incompleto;
 import interfaces.Algoritmo;
-import interfaces.FuncionEjercicio;
+import interfaces.Funcion;
 import static java.lang.Math.*;
 
 /** <b>Algoritmo del Punto Fijo</b>
@@ -23,7 +23,7 @@ import static java.lang.Math.*;
 public class PuntoFijo implements Algoritmo{
 	private Double tolerancia;
 	private Double aproxInicial;
-	private FuncionEjercicio funcEjercicio;
+	private Funcion funcEjercicio;
 
 	@Override
 	public void setTolerancia(double tol) {
@@ -34,7 +34,7 @@ public class PuntoFijo implements Algoritmo{
 		this.aproxInicial = aprox;
 	}
 	@Override
-	public void setFuncionEjercicio(FuncionEjercicio func) {
+	public void setFuncionEjercicio(Funcion func) {
 		this.funcEjercicio = func;
 	}
 	

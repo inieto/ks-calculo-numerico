@@ -2,7 +2,7 @@ package algoritmos.puntuales;
 
 import static org.junit.Assert.*;
 import static java.lang.Math.*;
-import interfaces.FuncionEjercicio;
+import interfaces.Funcion;
 
 import org.junit.Test;
 
@@ -14,7 +14,7 @@ public class PuntoFijoEjs {
 		PuntoFijo algoritmo = new PuntoFijo();
 		algoritmo.setTolerancia(tolerancia);
 		algoritmo.setAproxInicial(0);
-		algoritmo.setFuncionEjercicio(new FuncionEjercicio() {
+		algoritmo.setFuncionEjercicio(new Funcion() {
 			@Override
 			public double calcular(double X) {
 				double resultado = (pow(X,2) -1)/3;
