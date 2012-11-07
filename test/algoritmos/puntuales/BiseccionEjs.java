@@ -11,11 +11,11 @@ public class BiseccionEjs {
 
 	@Test
 	public void ejercicio1() {
-		Biseccion bis = new Biseccion();
-		bis.setLimiteMin(-0.5);
-		bis.setLimiteMax(1);
-		bis.setTolerancia(tolerancia);
-		bis.setFuncionEjercicio(new FuncionEjercicio() {
+		Biseccion algoritmo = new Biseccion();
+		algoritmo.setLimiteMin(-0.5);
+		algoritmo.setLimiteMax(1);
+		algoritmo.setTolerancia(tolerancia);
+		algoritmo.setFuncionEjercicio(new FuncionEjercicio() {
 			@Override
 			public double calcular(double X) {
 				System.out.println("--> f("+X+") = "+X);
@@ -26,17 +26,17 @@ public class BiseccionEjs {
 				return "f(x)=x, 0<=X<=1";
 			}
 		});
-		double raiz = bis.calcular();
+		double raiz = algoritmo.calcular();
 		assertEquals(0, raiz, tolerancia);
 	}
 	
 	@Test
 	public void ejercicio2() {
-		Biseccion bis = new Biseccion();
-		bis.setLimiteMin(-0.5);
-		bis.setLimiteMax(1);
-		bis.setTolerancia(tolerancia);
-		bis.setFuncionEjercicio(new FuncionEjercicio() {
+		Biseccion algoritmo = new Biseccion();
+		algoritmo.setLimiteMin(-0.5);
+		algoritmo.setLimiteMax(1);
+		algoritmo.setTolerancia(tolerancia);
+		algoritmo.setFuncionEjercicio(new FuncionEjercicio() {
 			@Override
 			public double calcular(double X) {
 				System.out.println("--> f("+X+")="+X+" - sen(pi* "+X+" ))");
@@ -47,7 +47,7 @@ public class BiseccionEjs {
 				return "g(x)=x-sen(pi*x), 0<=X<=1";
 			}
 		});
-		double raiz = bis.calcular();
+		double raiz = algoritmo.calcular();
 		assertEquals(0, raiz, tolerancia);
 	}
 
