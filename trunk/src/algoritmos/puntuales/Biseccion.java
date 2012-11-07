@@ -60,7 +60,8 @@ public class Biseccion implements Algoritmo{
 	}
 	
 	private void validarCompletitud() {
-		if(this.tolerancia == null || this.limiteMax == null || this.limiteMin == null || this.funcEjercicio == null) {
+		if (this.tolerancia == null || this.limiteMax == null
+				|| this.limiteMin == null || this.funcEjercicio == null) {
 			throw new Incompleto("Algun valor vino en null");
 		}
 	}

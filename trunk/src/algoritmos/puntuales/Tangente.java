@@ -57,7 +57,8 @@ public class Tangente implements Algoritmo{
 	}
 	
 	private void validarCompletitud() {
-		if(this.tolerancia == null || this.funcEjercicio == null || this.funcDerivada == null) {
+		if (this.tolerancia == null || this.funcEjercicio == null
+				|| this.funcDerivada == null || this.aproxInicial == null) {
 			throw new Incompleto("Algun valor vino en null");
 		}
 	}

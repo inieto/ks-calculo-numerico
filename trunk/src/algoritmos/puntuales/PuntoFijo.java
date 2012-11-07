@@ -54,7 +54,7 @@ public class PuntoFijo implements Algoritmo{
 	}
 	
 	private void validarCompletitud() {
-		if(this.tolerancia == null || this.funcEjercicio == null) {
+		if(this.tolerancia == null || this.funcEjercicio == null || this.aproxInicial == null) {
 			throw new Incompleto("Algun valor vino en null");
 		}
 	}
