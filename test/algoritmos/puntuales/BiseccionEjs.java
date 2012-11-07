@@ -2,7 +2,7 @@ package algoritmos.puntuales;
 
 import static org.junit.Assert.*;
 import static java.lang.Math.*;
-import interfaces.FuncionEjercicio;
+import interfaces.Funcion;
 
 import org.junit.Test;
 
@@ -15,7 +15,7 @@ public class BiseccionEjs {
 		algoritmo.setLimiteMin(-0.5);
 		algoritmo.setLimiteMax(1);
 		algoritmo.setTolerancia(tolerancia);
-		algoritmo.setFuncionEjercicio(new FuncionEjercicio() {
+		algoritmo.setFuncionEjercicio(new Funcion() {
 			@Override
 			public double calcular(double X) {
 				System.out.println("--> f("+X+") = "+X);
@@ -36,7 +36,7 @@ public class BiseccionEjs {
 		algoritmo.setLimiteMin(-0.5);
 		algoritmo.setLimiteMax(1);
 		algoritmo.setTolerancia(tolerancia);
-		algoritmo.setFuncionEjercicio(new FuncionEjercicio() {
+		algoritmo.setFuncionEjercicio(new Funcion() {
 			@Override
 			public double calcular(double X) {
 				System.out.println("--> f("+X+")="+X+" - sen(pi* "+X+" ))");
