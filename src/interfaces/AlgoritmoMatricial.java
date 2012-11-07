@@ -1,9 +1,6 @@
 package interfaces;
 
-import java.util.List;
-
-
 public interface AlgoritmoMatricial {
-	public void setMatriz(List<Double[]> matriz);
+	public void setMatriz(double[][] A, double[] B);
 	public double[] calcular();
 }
