@@ -1,10 +1,15 @@
-package algoritmos.puntuales;
+package resolucion.raices;
 
 import static org.junit.Assert.*;
 import static java.lang.Math.*;
 import interfaces.Funcion;
 
 import org.junit.Test;
+
+import resolucion.raices.Tangente;
+
+
+
 
 public class TangenteEjs {
 	private double tolerancia = 0.001;

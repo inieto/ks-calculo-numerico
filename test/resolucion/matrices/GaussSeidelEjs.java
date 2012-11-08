@@ -1,12 +1,17 @@
-package algoritmos.espaciales;
+package resolucion.matrices;
 
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
+
 import org.junit.Test;
 
-public class JacobiEjs {
+import resolucion.matrices.GaussSeidel;
+
+
+
+public class GaussSeidelEjs {
 	private double tolerancia = 0.001;
 	private int limiteIntentos = 15;
 	
@@ -16,13 +21,13 @@ public class JacobiEjs {
 						{ 2, 4, -2 },
 						{ 0, 3, 15 }};
 		double[] b = { 4, 2, 36 };
-		Jacobi jacob = new Jacobi();
-		jacob.setMatriz(a, b);
-		jacob.setTolerancia(this.tolerancia);
-		jacob.setLimiteIntentos(this.limiteIntentos);
+		GaussSeidel gs = new GaussSeidel();
+		gs.setMatriz(a, b);
+		gs.setTolerancia(this.tolerancia);
+		gs.setLimiteIntentos(this.limiteIntentos);
 //		{0,0,0} diverge. {-0.9,2,2} llega a la raiz!. Todas las otras combinaciones con los números 2 divergen.
-		jacob.setAproximacionInicial(new double[]{-0.9,2,2});
-		double[] x = jacob.calcular();
+		gs.setAproximacionInicial(new double[]{-0.9,2,2});
+		double[] x = gs.calcular();
 		imprimirMatriz(x);
 		assertTrue(Arrays.equals(x, new double[]{-1,2,2}));	//{-1,2,2} es raiz hallada con EliminacionGauseana
 	}
