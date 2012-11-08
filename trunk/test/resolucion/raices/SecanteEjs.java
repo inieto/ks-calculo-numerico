@@ -8,9 +8,6 @@ import org.junit.Test;
 
 import resolucion.raices.Secante;
 
-
-
-
 public class SecanteEjs {
 	private double tolerancia = 0.001;
 
@@ -31,9 +28,11 @@ public class SecanteEjs {
 			}
 			@Override
 			public String desc() {
-				return "f(x)=cos(x)-x, PI/4<=X<=PI/2";
+				return "f(x)=cos(x)-x";
 			}
 		});
+		
+		System.out.println(algoritmo);
 		double raiz = algoritmo.calcular();
 		assertEquals(0.73908513, raiz, tolerancia);
 	}
