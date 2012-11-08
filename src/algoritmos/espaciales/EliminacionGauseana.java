@@ -91,7 +91,7 @@ public class EliminacionGauseana implements AlgoritmoMatricial{
 	}
 	
 	private void validarCompletitud() {
-		if (this.a == null) {
+		if (this.a == null || this.b == null) {
 			throw new Incompleto("Algun valor vino en null");
 		}
 	}
