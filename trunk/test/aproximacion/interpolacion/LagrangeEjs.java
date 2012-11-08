@@ -15,5 +15,17 @@ public class LagrangeEjs {
 		double result = lag.calcular(d);
 		System.out.println("Valor aproximado de f("+d+"): " + result);
 	}
+	
+	@Test
+	public void ejercicio2() {
+		double x[] = {2, 2.5, 4};
+		double f[] = {0.5, 0.4, 0.25};
+		double d = 3;
+		Lagrange lag = new Lagrange();
+		lag.setValoresXConocidos(x);
+		lag.setValoresFxConocidos(f);
+		double result = lag.calcular(d);
+		System.out.println("Valor aproximado de f("+d+"): " + result);
+	}
 
 }

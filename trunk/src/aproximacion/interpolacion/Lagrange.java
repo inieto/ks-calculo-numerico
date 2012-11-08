@@ -1,5 +1,7 @@
 package aproximacion.interpolacion;
 
+import java.util.Arrays;
+
 import excepciones.Incompleto;
 import interfaces.Algoritmo;
 import interfaces.Funcion;
@@ -30,35 +32,36 @@ public class Lagrange {
 		this.f = f;
 	}
 	
-	public void calcular(){
-		this.calcular(null);
-	}
-	
-	public double calcular(Double d) {
-		StringBuilder sb  = new StringBuilder("P(x) = ");
-		StringBuilder sb2 = new StringBuilder("P(x) = ");
-		String s = (d==null)?"X":String.valueOf(d);
+	public double calcular(double d) {
+		this.validarCompletitud();
+		int n = this.x.length;
+		System.out.println("Hay "+n+" pares [x,f(X)] conocidos.");
+		System.out.println("X:    "+Arrays.toString(this.x));
+		System.out.println("f(X): "+Arrays.toString(this.f));
+		System.out.println("Se generará un polinomio de grado "+(n-1)+" con "+n+" términos");
 		
-		int n = x.length-1;
-		double ft[] = (double[]) f.clone();
-		for (int i=0; i<n; ++i) {
-			for (int j=0; j<n-i; ++j) {
-				ft[j] =   ft[j+1] * (d-x[j])     / (x[i+j+1]-x[j])
-					+ ft[j]   * (d-x[i+j+1]) / (x[j]    -x[i+j+1]);
-				sb.append("ft[j] = ft[j+1] * (d-x[j])   / (x[i+j+1]- x[j]) \n"
-					+	  " 	 + ft[j] * (d-x[i+j+1]) / (x[j]    - x[i+j+1])");
-				sb2.append("ft["+j+"] = ft["+(j+1)+"] * ("+s+"-x["+j+"])   / (x["+(i+j+1)+"i+j+1]- x["+j+"]) \n"
-						+	  " 	 + ft["+j+"] * ("+s+"-x["+(i+j+1)+"]) / (x"+j+"j]    - x"+(i+j+1)+")");
+		double resultado = 0;	//neutro de la suma
+		StringBuilder sbResultado = new StringBuilder("P(X) = ");
+		for (int i=0; i < n; i++) {
+			//Primero armo la productoria y luego se la multiplico en la sumatoria.
+			double productoria = 1;	//neutro de la multiplicación
+			StringBuilder sbProductoria = new StringBuilder();
+			for (int j=0; j < n; j++) {
+				if(j==i) continue;	//salvar el caso i=j según carpeta
+				productoria *= (d - x[j]) / (x[i] - x[j]);
+				sbProductoria.append(" * ( (X - "+x[j]+") / ("+x[i]+" - "+x[j]+") )");
 			}
+			resultado += f[i] * productoria;
+			sbResultado.append(f[i]).append(sbProductoria);
+			if(i < n-1) sbResultado.append(" + \n");
 		}
-		System.out.println(sb.toString());
-		System.out.println(sb2.toString());
-		return ft[0];
+		System.out.println(sbResultado);
+		return resultado;
 	}
 	
 	private void validarCompletitud() {
-		if (this.x == null || this.f == null) {
-			throw new Incompleto("Algun valor vino en null");
+		if (this.x == null || this.f == null || this.x.length != this.f.length) {
+			throw new Incompleto("Algun valor vino en null o tienen distinto tamaño");
 		}
 	}
 }
