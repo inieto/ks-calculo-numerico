@@ -1,4 +1,4 @@
-package algoritmos.puntuales;
+package resolucion.raices;
 
 import excepciones.Incompleto;
 import interfaces.Algoritmo;

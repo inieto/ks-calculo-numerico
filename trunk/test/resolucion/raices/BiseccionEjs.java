@@ -1,10 +1,15 @@
-package algoritmos.puntuales;
+package resolucion.raices;
 
 import static org.junit.Assert.*;
 import static java.lang.Math.*;
 import interfaces.Funcion;
 
 import org.junit.Test;
+
+import resolucion.raices.Biseccion;
+
+
+
 
 public class BiseccionEjs {
 	private double tolerancia = 0.001;

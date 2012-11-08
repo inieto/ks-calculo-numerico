@@ -1,4 +1,4 @@
-package algoritmos.espaciales;
+package resolucion.matrices;
 
 import interfaces.AlgoritmoMatricial;
 import excepciones.Incompleto;

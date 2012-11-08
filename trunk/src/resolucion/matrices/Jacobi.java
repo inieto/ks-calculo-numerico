@@ -1,4 +1,4 @@
-package algoritmos.espaciales;
+package resolucion.matrices;
 
 import static java.lang.Math.abs;
 import interfaces.AlgoritmoMatricial;

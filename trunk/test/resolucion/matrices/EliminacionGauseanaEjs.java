@@ -1,8 +1,13 @@
-package algoritmos.espaciales;
+package resolucion.matrices;
 
 import static org.junit.Assert.*;
 
+
 import org.junit.Test;
+
+import resolucion.matrices.EliminacionGauseana;
+
+
 
 public class EliminacionGauseanaEjs {
 	@Test
