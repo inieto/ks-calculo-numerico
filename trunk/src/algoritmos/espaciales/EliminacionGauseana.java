@@ -5,8 +5,10 @@ import excepciones.Incompleto;
 import static java.lang.Math.*;
 
 /** <b>Algoritmo de Eliminación Gauseana</b>
-	Este algoritmo busca hallar las x1...xn (osea X) que cumplan A . X = B (matrices)
-	con A(nxn), X(n) y B(n). Si A no es cuadrada o alguna de sus filas es combinación lineal de otras, 
+	Este algoritmo busca hallar las x1...xn (osea X) que cumplan A . X = B (matrices) con A(nxn), X(n) y B(n). 
+	Lo logra triangulando inferiormente a A (osea, dejando todos 0s debajo de la diagonal ppal) y reemplazando luego.
+	
+	Si A no es cuadrada o alguna de sus filas es combinación lineal de otras, 
 	entonces el sistema está mal condicionado y hay infinitas soluciones
 */
 public class EliminacionGauseana implements AlgoritmoMatricial{
@@ -26,10 +28,10 @@ public class EliminacionGauseana implements AlgoritmoMatricial{
 	public double[] calcular() {
 		validarCompletitud();
 		
-		for (int p = 0; p < this.n; p++) {		//por cada fila..
+		for (int p = 0; p < this.n; p++) {	//por cada fila..
 			this.subirFilaMasGrande(p);		//Algoritmo paso-1: A[p][i] =  max(i<j<n)  A[j][i]
 			this.validarMalCondicionado(p);	//Si A[p][i] == 0 STOP
-			this.triangulizarColumna(p);
+			this.triangulizarColumna(p);	//Ej <-- (Ej - mIJ.Ei) para todo j=i+...+n 
 		}
 		return hallarVectorX();
 	}
@@ -37,19 +39,19 @@ public class EliminacionGauseana implements AlgoritmoMatricial{
 	/** Algoritmo paso 1: Pivotea la fila mas trande arriba, a partir de la fila "p"
 	 */
 	private void subirFilaMasGrande(int p) {
-		//la fila con el elemento max para esa columna, subirá al lugar P
+		//la fila "i" con el elemento max para la columna P, subirá al lugar P
 		int max = p;
-		for (int i = p + 1; i < b.length; i++) {
-			if (abs(this.a[i][p]) > abs(this.a[max][p])) {
+		for (int i = p + 1; i < this.n; i++) {	//arranco desde la fila siguiente a P para buscar el max
+			if (abs(this.a[i][p]) > abs(this.a[max][p])) {	//la fila "i" tiene su columna "p" más grande?
 				max = i;
 			}
-		}
-		double[]temp= this.a[p]; this.a[p] = this.a[max]; this.a[max] = temp;
-		double	t	= this.b[p]; this.b[p] = this.b[max]; this.b[max] = t;
+		}	//aca encontre el valor max de la columna "P" para poner en la fila "P".
+		double[]temp= this.a[p]; this.a[p] = this.a[max]; this.a[max] = temp;	//switcheo las filas en A
+		double	t	= this.b[p]; this.b[p] = this.b[max]; this.b[max] = t;		//switcheo las filas en b
 	}
 	
 	/** Algoritmo paso 2 dice: Si |A[p][i]| == 0 STOP
-	 * 0 es ideal, porque en las divisiones de double quedan los decimales.
+	 * 0 es ideal, porque en las operaciones sobre double quedan los decimales y nunca dan 0 exacto.
 	 * Sistema mal condicionado => infinitas soluciones
 	 */
 	private void validarMalCondicionado(int p) {
@@ -59,27 +61,31 @@ public class EliminacionGauseana implements AlgoritmoMatricial{
 	}
 	
 	/** Algoritmo paso 3: Tengo que llevar a 0 el resto de las "p" filas hacia abajo, de dicha columna
+	 * Para esto: |a b| =>	| a b 			 | => | a b				| => |a b		 | => Matriz
+	 * mIJ=c/a	  |c d|		|(c d)- c/a*(a b)|	  |(c d)- (c  c*b/a)|	 |0 d-(c*b/a)|	Triangulada!
 	 */
 	private void triangulizarColumna(int p) {
-		for (int i = p + 1; i < this.n; i++) {	//Al resto de las filas de esa columna las llevo a 0 para triangular la matriz...
-			double mIJ = this.a[i][p] / this.a[p][p];
-			this.b[i] -= mIJ * this.b[p];
-			for (int j = p; j < this.n; j++) {
-				this.a[i][j] -= mIJ * this.a[p][j];
+		for (int i = p + 1; i < this.n; i++) {			//Al resto de las filas de "p" para abajo
+			double mIJ = this.a[i][p] / this.a[p][p];	//col_actual dividida por la de arriba. 
+			this.b[i] -= mIJ * this.b[p];				//aplico la resta también en b
+			for (int j = p; j < this.n; j++) {			//en cada columna de A
+				this.a[i][j] -= mIJ * this.a[p][j];		//aplico la resta en cada columna de A
 			}
-		}
+		}//por cada iteración de estas avanza en diagonal uno para abajo y uno para la derecha
 	}
 	
-	/** Algoritmo paso 7: Despeja las X con la matriz ya triangular
+	/** Algoritmo paso 7: Despeja las X con la matriz ya triangular. Ej:
+		|3.X1 + 2.X2 = 4| \ X1 = (4-2.X2)/3 \ X1 = (4-2.2)/3 = 0
+		|	0 + 3.X2 = 6| / X2 = 6/3		/ X2 = 2
 	 */
 	private double[] hallarVectorX() {
-		double[] x = new double[this.n];
-		for (int i = this.n - 1; i >= 0; i--) {
-			double sum = 0.0;
-			for (int j = i + 1; j < this.n; j++) {
-				sum += this.a[i][j] * x[j];
+		double[] x = new double[this.n];			//lugar dde poner los resultados
+		for (int i = this.n - 1; i >= 0; i--) {		//desde abajo para arriba (el último valor es el Xn despejado Xn=valor)
+			double sum = 0.0;						//Auxiliar
+			for (int j = i + 1; j < this.n; j++) {	//La primera vez no entra porque j toma el valor n+1 (en arrays es "n" solo porque se cuenta desde 0 a n-1)
+				sum += this.a[i][j] * x[j];			//Sería el 2.X2 del ejemplo
 			}
-			x[i] = (this.b[i] - sum) / this.a[i][i];
+			x[i] = (this.b[i] - sum) / this.a[i][i]; //Sería el X1 = (4-2.X2)/3 del ejemplo 
 		}
 		return x;
 	}
