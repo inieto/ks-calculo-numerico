@@ -39,16 +39,25 @@ public class PuntoFijo implements Algoritmo{
 	}
 	
 	@Override
+	public String toString() {
+		return "PuntoFijo aproxInicial=" + aproxInicial + ", tolerancia=" + tolerancia + ", funcion " + funcEjercicio.desc();
+	}
+		
+	@Override
 	public double calcular() {
 		validarCompletitud();
 		double resultadoAnterior = this.aproxInicial;
 		double ptoFijo = this.funcEjercicio.calcular(resultadoAnterior);
+		
 		System.out.println("Aprox. inicial: "+resultadoAnterior+". actual:"+ptoFijo);
+		
 		while(abs(ptoFijo-resultadoAnterior) > this.tolerancia) {
+			System.out.println("Nueva iteracion--------------------------------------------");
 			resultadoAnterior = ptoFijo;
 			ptoFijo = this.funcEjercicio.calcular(resultadoAnterior);
 			System.out.println("Aprox. anterior: "+resultadoAnterior+". actual:"+ptoFijo);
 		}
+		
 		System.out.println("ptoFijo: "+ptoFijo);
 		return ptoFijo;
 	}
