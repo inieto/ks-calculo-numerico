@@ -21,9 +21,9 @@ import excepciones.Incompleto;
 	entonces el sistema está mal condicionado y hay infinitas soluciones
 */
 public class Jacobi implements AlgoritmoMatricial{
-	private double[][] a;
-	private double  [] b;
-	private int n;
+	protected double[][] a;
+	protected double  [] b;
+	protected int n;
 	private Double tolerancia;
 	private Integer limiteIntentos;
 	private double[] aproxInicial;
@@ -162,7 +162,7 @@ public class Jacobi implements AlgoritmoMatricial{
 	/**	Itera X1 = T . Xo + C
 	 * (se supone que en esta instancia en this.a se guardó T y en this.b se guardó C).
 	 */
-	private double[] iterar(double[] x0) {
+	protected double[] iterar(double[] x0) {
 		double[] x1 = new double[this.n];
 		double[][] t = this.a;
 		double  [] c = this.b;
