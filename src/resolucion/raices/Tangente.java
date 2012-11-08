@@ -38,6 +38,11 @@ public class Tangente implements Algoritmo{
 	}
 	
 	@Override
+	public String toString() {
+		return "Tangente aproxInicial=" + aproxInicial + ", tolerancia=" + tolerancia + ", funcion " + funcEjercicio.desc() + ", derivada " + funcDerivada.desc();
+	}
+	
+	@Override
 	public double calcular() {
 		validarCompletitud();
 		double resultadoAnterior = this.aproxInicial;
@@ -57,8 +62,7 @@ public class Tangente implements Algoritmo{
 	}
 	
 	private void validarCompletitud() {
-		if (this.tolerancia == null || this.funcEjercicio == null
-				|| this.funcDerivada == null || this.aproxInicial == null) {
+		if (this.tolerancia == null || this.funcEjercicio == null || this.funcDerivada == null || this.aproxInicial == null) {
 			throw new Incompleto("Algun valor vino en null");
 		}
 	}

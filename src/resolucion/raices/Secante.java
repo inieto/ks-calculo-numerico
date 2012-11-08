@@ -34,6 +34,12 @@ public class Secante implements Algoritmo{
 	public void setFuncionEjercicio(Funcion func) {
 		this.funcEjercicio = func;
 	}
+	
+	@Override
+	public String toString() {
+		return "Secante aproxInicial0=" + aproxInicial0 + ", aproxInicial1=" + aproxInicial1 + ", tolerancia=" + tolerancia + ", funcion " + funcEjercicio.desc();
+	}	
+	
 	@Override
 	public double calcular() {
 		validarCompletitud();
