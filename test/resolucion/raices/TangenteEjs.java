@@ -26,7 +26,7 @@ public class TangenteEjs {
 			}
 			@Override
 			public String desc() {
-				return "f(x)=cos(x)-x";
+				return "f(x)=cos(x)-x, PI/4<=X<=PI/2";
 			}
 		});
 		
@@ -39,7 +39,7 @@ public class TangenteEjs {
 			}
 			@Override
 			public String desc() {
-				return "f'(x)=-sin(x)-1";
+				return "f'(x)=-sin(x)-1, PI/4<=X<=PI/2";
 			}
 		});
 		
@@ -47,4 +47,38 @@ public class TangenteEjs {
 		double raiz = algoritmo.calcular();
 		assertEquals(0.73908513, raiz, tolerancia);
 	}
+
+	
+	@Test
+	public void ejercicio2() {
+		Tangente algoritmo = new Tangente();
+		algoritmo.setTolerancia(tolerancia);
+		algoritmo.setAproxInicial(-1);
+		algoritmo.setFuncionEjercicio(new Funcion() {
+			@Override
+			public double calcular(double X) {
+				System.out.println("--> f("+X+")= "+X+"^3 - "+X+"^2 + 2."+X+" + 5");
+				return X*X*X - X*X + 2* X + 5;
+			}
+			@Override
+			public String desc() {
+				return "f(X)= X^3 - X^2 + 2.X + 5";
+			}
+		});
+		algoritmo.setFuncionDerivada(new Funcion() {
+			@Override
+			public double calcular(double X) {
+				System.out.println("--> f("+X+")= 3*"+X+"^2 - 2*"+X+" + 2");
+				return 3*X*X - 2*X + 2;
+			}
+			@Override
+			public String desc() {
+				return "f(X)= 3*X^2 - 2*X + 2";
+			}
+		});
+		
+		double raiz = algoritmo.calcular();
+		assertEquals(-1.1324936902897467, raiz, tolerancia);
+	}
 }
+

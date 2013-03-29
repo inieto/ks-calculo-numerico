@@ -28,7 +28,7 @@ public class SecanteEjs {
 			}
 			@Override
 			public String desc() {
-				return "f(x)=cos(x)-x";
+				return "f(x)=cos(x)-x, PI/4<=X<=PI/2";
 			}
 		});
 		
