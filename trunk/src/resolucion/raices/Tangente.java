@@ -51,12 +51,14 @@ public class Tangente implements Algoritmo{
 				/ this.funcDerivada.calcular(resultadoAnterior);
 		System.out.println("Aprox. inicial: "+resultadoAnterior+". actual:"+raiz);
 		while(abs(raiz-resultadoAnterior) > this.tolerancia) {
+			System.out.println("Diferencia: "+abs(raiz-resultadoAnterior));
 			resultadoAnterior = raiz;
 			raiz = resultadoAnterior		// X = Xo - f(Xo)/f'(Xo)
 					- this.funcEjercicio.calcular(resultadoAnterior)
 					/ this.funcDerivada.calcular(resultadoAnterior);
 			System.out.println("Aprox. anterior: "+resultadoAnterior+". actual:"+raiz);
 		}
+		System.out.println("Diferencia: "+abs(raiz-resultadoAnterior));
 		System.out.println("raiz: "+raiz);
 		return raiz;
 	}
