@@ -38,43 +38,31 @@ public class Biseccion implements Algoritmo{
 	@Override
 	public double calcular() {
 		validarCompletitud();
-
-		System.out.print("Min: ");
-		double raiz = this.funcEjercicio.calcular(this.limiteMin);
-		double medio = -1;
-		
-		if(abs(raiz) > this.tolerancia) {
-		
-			System.out.print("Max: ");
-			raiz = this.funcEjercicio.calcular(this.limiteMax);
-			
-			if(abs(raiz) > this.tolerancia) {
-			
-				System.out.print("Med: ");
+		double medio = (this.limiteMin+this.limiteMax)/2;
+		double resultadoFuncion = this.funcEjercicio.calcular(this.limiteMin);
+		System.out.println("f(min) = f("+this.limiteMin+") = "+resultadoFuncion);
+		if(abs(resultadoFuncion) > this.tolerancia) {
+			resultadoFuncion = this.funcEjercicio.calcular(this.limiteMax);
+			System.out.println("f(Max) = f("+this.limiteMax+") = "+resultadoFuncion);
+			if(abs(resultadoFuncion) > this.tolerancia) {
 				medio = (this.limiteMin+this.limiteMax)/2;
-				raiz = this.funcEjercicio.calcular(medio);
-				
-				while(abs(raiz) > tolerancia) {
-					
-					System.out.println("Nueva iteracion---------------");
-					System.out.print("Min: ");
-					if (raiz * this.funcEjercicio.calcular(this.limiteMin) > 0) { //mismo signo
+				resultadoFuncion = this.funcEjercicio.calcular(medio);
+				while(abs(resultadoFuncion) > tolerancia) {
+					System.out.println("f(med) = f("+medio+") = "+resultadoFuncion);
+					if (resultadoFuncion * this.funcEjercicio.calcular(this.limiteMin) > 0) { //mismo signo
 						//Si tienen mismo signo no cumplo aún el teorema del valor medio.
 						this.limiteMin = medio;
 					} else {	//distinto signo
 						this.limiteMax = medio;
 					}
-					
+					System.out.println("nuevo-min: "+this.limiteMin+". nuevo-Max: "+this.limiteMax);
 					medio = (this.limiteMin+this.limiteMax)/2;
-					System.out.println("nuevo-min: "  + this.limiteMin + ", nuevo-Med: " + medio +", nuevo-Max: "+this.limiteMax);
-					
-					System.out.print("Med: ");
-					raiz = this.funcEjercicio.calcular(medio);
+					resultadoFuncion = this.funcEjercicio.calcular(medio);
 				}
 			}
 		}
-		System.out.println("Resultado=" + medio);
-		return raiz;
+		System.out.println("raiz: "+medio);
+		return resultadoFuncion;
 	}
 	
 	private void validarCompletitud() {
