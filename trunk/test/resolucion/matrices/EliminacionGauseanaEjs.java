@@ -35,6 +35,18 @@ public class EliminacionGauseanaEjs {
 		double[] x = eg.calcular();
 		imprimirMatriz(x);
 	}
+	
+	@Test
+	public void ejercicio3() {
+		double[][] a = {{ 4,-1, 1 },
+						{ -1, 4.25, 2.75 },
+						{ 1, 2.75, 3.5 }};
+		double[] b = {1,1,1};
+		EliminacionGauseana eg = new EliminacionGauseana();
+		eg.setMatriz(a, b);
+		double[] x = eg.calcular();
+		imprimirMatriz(x);
+	}
 
 	private void imprimirMatriz(double[] x) {
 		for (int i = 0; i < x.length; i++) {
