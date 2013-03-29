@@ -15,16 +15,36 @@ public class SimpsonEjs {
 		sG2.setLimiteMin(x[0]);
 		sG2.setLimiteMax(x[1]);
 		sG2.setFuncionEjercicio(new Funcion() {
-			
 			@Override
 			public String desc() {
 				return "--> f(x) = (1 / sqrt(2*PI)) * e^ (-(x^2)/2)";
 			}
-			
 			@Override
 			public double calcular(double x) {
 				System.out.println("f("+x+") = (1 / sqrt(2*PI)) * e^(-"+(x*x)+"/2)");
 				return pow( E, -x*x/2 ) / sqrt(2*PI);
+			}
+		});
+		double result = sG2.calcular();
+		System.out.println("Valor aproximado de I2(f): " + result);
+	}
+	
+	@Test
+	public void ejercicio2() {
+		double x[] = {0, 1};
+		double d = 0.5;
+		SimpsonG2 sG2 = new SimpsonG2();
+		sG2.setLimiteMin(x[0]);
+		sG2.setLimiteMax(x[1]);
+		sG2.setFuncionEjercicio(new Funcion() {
+			@Override
+			public String desc() {
+				return "--> f(x) = (1 + x)^0.5";
+			}
+			@Override
+			public double calcular(double x) {
+				System.out.println("f("+x+") = (1 + "+x+")^0.5");
+				return pow(1+x, 0.5 );
 			}
 		});
 		double result = sG2.calcular();
