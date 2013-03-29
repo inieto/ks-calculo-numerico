@@ -9,10 +9,12 @@ import excepciones.Incompleto;
 
 /** <b>Algoritmo de aproximación de Jacobi</b>
 	Este algoritmo busca aproximar las x1...xn (osea X) que cumplan A . X = B (matrices) con A(nxn), X(n) y B(n). 
+	
 	Lo logra llevando A.x=b a la forma Xi = T.Xo + C, donde T=A/aii y C=B/aii (aii son los elems de la diag.ppal)
 	Luego, itera desde una aproxInicial los valores de Xi hasta que "con suerte" converjan.
 	"Con suerte" es porque dependiendo de la aproxInicial puede o no converger; "salvo" que la diagonal principal sea
 	"dominante", osea, que cada elemento de la diagonal sea MAYOR a la suma de todos los otros valores de la columna.
+	
 	Si no es dominante podemos, o no aplicar el algoritmo, o probar distintas aproximaciones iniciales.
 	Por último, NUNCA puede haber un 0 en la diagonal ppal antes de despejar. Es condición para usar el algoritmo.
 	Este algoritmo verifica e informa si la diagonal es dominante o si su diagonal ppal tiene 0s 

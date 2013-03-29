@@ -1,5 +1,7 @@
 package resolucion.matrices;
 
+import java.util.Arrays;
+
 import interfaces.AlgoritmoMatricial;
 import excepciones.Incompleto;
 import static java.lang.Math.*;
@@ -30,8 +32,16 @@ public class EliminacionGauseana implements AlgoritmoMatricial{
 		
 		for (int p = 0; p < this.n; p++) {	//por cada fila..
 			this.subirFilaMasGrande(p);		//Algoritmo paso-1: A[p][i] =  max(i<j<n)  A[j][i]
+			System.out.println("Reordeno: A:");
+			imprimirMatriz(a);
+			System.out.println("Reordeno: B:");
+			imprimirMatriz(b);
 			this.validarMalCondicionado(p);	//Si A[p][i] == 0 STOP
-			this.triangulizarColumna(p);	//Ej <-- (Ej - mIJ.Ei) para todo j=i+...+n 
+			this.triangulizarColumna(p);	//Ej <-- (Ej - mIJ.Ei) para todo j=i+...+n
+			System.out.println("trianguarizada: A:");
+			imprimirMatriz(a);
+			System.out.println("trianguarizada: B:");
+			imprimirMatriz(b);
 		}
 		return hallarVectorX();
 	}
@@ -85,9 +95,21 @@ public class EliminacionGauseana implements AlgoritmoMatricial{
 			for (int j = i + 1; j < this.n; j++) {	//La primera vez no entra porque j toma el valor n+1 (en arrays es "n" solo porque se cuenta desde 0 a n-1)
 				sum += this.a[i][j] * x[j];			//Sería el 2.X2 del ejemplo
 			}
-			x[i] = (this.b[i] - sum) / this.a[i][i]; //Sería el X1 = (4-2.X2)/3 del ejemplo 
+			x[i] = (this.b[i] - sum) / this.a[i][i]; //Sería el X1 = (4-2.X2)/3 del ejemplo
+			System.out.println("X["+i+"]: " + x[i]);
 		}
 		return x;
+	}
+	
+	private void imprimirMatriz(double[][] a) {
+		for (int i = 0; i < a.length; i++) {
+			System.out.println("|"+Arrays.toString(a[i])+"|");
+		}
+	}
+	private void imprimirMatriz(double[] b) {
+		for (int i = 0; i < b.length; i++) {
+			System.out.println("|"+b[i]+"|");
+		}
 	}
 	
 	private void validarCompletitud() {
